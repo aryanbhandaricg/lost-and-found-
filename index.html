@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FindDesk | Campus lost &amp; found</title>
+    <link rel="stylesheet" href="lost&found.css">
+    <script src="lost&found.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <a class="brand" href="#board" aria-label="FindDesk report board">
+            <svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+                <rect width="40" height="40" rx="10" fill="currentColor" />
+                <path d="M8 16 17 7h10v10l-9 9z" fill="white" />
+                <circle cx="23" cy="11" r="2" fill="currentColor" />
+                <path d="M9 25v6h22v-6" fill="none" stroke="white" stroke-width="3" />
+            </svg>
+            FindDesk
+        </a>
+        <nav aria-label="Campus desk">
+            <a href="#board">Board</a><a href="#matches">Matches</a>
+            <a href="#alerts">Alerts <span id="count">0</span></a><a href="#desk">Admin desk</a>
+        </nav>
+    </header>
+    <main>
+        <p class="demo">Offline demo · Reports, alerts and desk access are shared in this browser. Use fictional
+            details.</p>
+        <p id="notice" role="status"></p>
+
+        <section id="board">
+            <h1>Campus lost &amp; found</h1>
+            <p>Check the board or post an item to start a return.</p>
+            <div class="actions"><a class="primary" href="#lost">Report a lost item</a>
+                <a class="secondary" href="#found">Register a found item</a>
+            </div>
+            <h2>Report board</h2>
+            <div id="list" class="grid"></div>
+        </section>
+        <section id="lost" hidden>
+            <h1>Report a lost item</h1>
+            <p>Describe what you lost and where you last saw it.</p>
+        </section>
+        <section id="found" hidden>
+            <h1>Register a found item</h1>
+            <p>Share enough to help the owner recognise it. Keep one detail for verification.</p>
+        </section>
+        <section id="report" hidden>
+            <h1>Report details</h1>
+            <div id="detail"></div><a href="#board">Back to report board</a>
+        </section>
+        <section id="matches" hidden>
+            <h1>Possible matches</h1>
+            <p>We compare open reports by category, then look for a shared item word or the same location.</p>
+            <div id="pairs"></div>
+        </section>
+        <section id="alerts" hidden>
+            <h1>Desk alerts</h1>
+            <p>Match notifications and claim decisions, newest first.</p>
+            <div id="feed"></div>
+        </section>
+        <section id="claim" hidden>
+            <h1>Claim an item</h1>
+            <p>Link your lost report to a found item and describe a detail only the owner would know.</p>
+            <form id="claimForm">
+                <label>Your lost report<select name="lostId" required></select></label>
+                <label>Found item<select name="foundId" required></select></label>
+                <label>Ownership detail<textarea name="proof" maxlength="200" required></textarea></label>
+                <button>Send claim to desk</button>
+            </form>
+            <p>Need a lost report first? <a href="#lost">Report your item</a></p>
+        </section>
+        <section id="desk" hidden>
+            <h1>Admin desk</h1>
+            <p>Compare competing claims with the finder's clue. Confirm ownership in person before recording a handover.
+            </p>
+            <div id="reviews"></div>
+        </section>
+
+        <template id="reportFields">
+            <form>
+                <label>Item name<input name="itemName" maxlength="70" placeholder="e.g. Blue wallet" required></label>
+                <label>Category<select name="category">
+                        <option>Wallet</option>
+                        <option>ID card</option>
+                        <option>Keys</option>
+                        <option>Electronics</option>
+                        <option>Book</option>
+                        <option>Clothing</option>
+                        <option>Other</option>
+                    </select></label>
+                <label><span class="locationLabel"></span><input name="place" maxlength="90"
+                        placeholder="e.g. Central library" required></label>
+                <label>Description<textarea name="description" maxlength="250" required></textarea></label>
+                <label>Photo (optional, JPG or PNG, up to 350 KB)<input type="file" name="photo"
+                        accept="image/jpeg,image/png"></label>
+                <label class="clue">Desk verification clue<input name="clue" maxlength="150"
+                        placeholder="A detail left out of the public description" required></label>
+                <button>Post report</button>
+            </form>
+        </template>
+    </main>
+    <footer>FindDesk · Campus lost property desk</footer>
+</body>
+
+</html>
